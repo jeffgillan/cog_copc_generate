@@ -39,10 +39,10 @@ ENV PROJ_LIB=/opt/conda/envs/untwine_env/share/proj
 SHELL ["conda", "run", "-n", "untwine_env", "/bin/bash", "-c"]
 
 # Copy your shell script into the container
-COPY laz_to_copc.sh /usr/local/bin/laz_to_copc.sh
+COPY cog_copc_generate.sh /usr/local/bin/cog_copc_generate.sh
 
 # Make the shell script executable
-RUN chmod +x /usr/local/bin/laz_to_copc.sh
+RUN chmod +x /usr/local/bin/cog_copc_generate.sh
 
 # Set the entrypoint to your shell script
-ENTRYPOINT ["/usr/local/bin/laz_to_copc.sh"]
+ENTRYPOINT ["/usr/local/bin/cog_copc_generate.sh"]
