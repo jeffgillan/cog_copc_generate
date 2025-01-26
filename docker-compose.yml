@@ -16,8 +16,8 @@ services:
               capabilities: [gpu]
 
   untwine:
-    image: jeffgillan/laz_to_copc:amd64
-    container_name: laz_to_copc
+    image: jeffgillan/cog_copc_generate:amd64
+    container_name: cog_copc_generate
     depends_on:
       automate-metashape:
         condition: service_completed_successfully
