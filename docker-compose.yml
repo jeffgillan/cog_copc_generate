@@ -1,0 +1,25 @@
+services:
+  automate-metashape:
+    image: ghcr.io/open-forest-observatory/automate-metashape
+    container_name: automate-metashape
+    volumes:
+      - ".:/data" # Mount the present working directory into the container
+    environment:
+      - AGISOFT_FLS=${AGISOFT_FLS} # Pass environment variable to the container
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  untwine:
+    image: jeffgillan/laz_to_copc:amd64
+    container_name: laz_to_copc
+    depends_on:
+      automate-metashape:
+        condition: service_completed_successfully
+    volumes:
+      - ./output:/input
