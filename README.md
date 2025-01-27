@@ -1,4 +1,4 @@
-# cog_copc_generator
+# cog_copc_generate
 
 This repository describes the use of containerized software to **1.** convert geotif files to cloud-optimized geotifs (COGs) and **2.** convert.laz (or .las) point clouds to cloud-optimized point clouds (COPCs). The conversion to COGs is executed using [Gdal](https://gdal.org/en/stable/) command-line tool, while the conversion to COPCs is handled by [Untwine](https://github.com/hobuinc/untwine) command-line tool. 
 
