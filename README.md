@@ -28,9 +28,9 @@ This `cog_copc_generate` container was designed to work direcly with [automate-m
 
 Configuration to run `automate-metashape` and `cog_copc_generate` sequentially is controlled in the `docker-compose.yml` file located in this repository. Download this file to be in or near the local directory with the aerial images to be processed. You only need to change a few items in this yml. 
 
-* Specify the directory of images to be mounted in the container.
+* Specify the directory of images to be mounted in the container. This is relative to your current working directory. 
 * Make sure your Metashape license has already been declared in your terminal session
-* Specify the directory where the output image products are being written to. This is how `cog_copc_generate` knows where to look for .tif and .laz/.las files for conversion to COGs and COPCs. 
+* Specify the directory where the output image products are being written to. This is relative to your current working directory and is specified within the automate-metashape `config.yml`. 
 
 <br>
 
@@ -40,9 +40,9 @@ services:
     image: ghcr.io/open-forest-observatory/automate-metashape
     container_name: automate-metashape
     volumes:
-      - "</host/data/dir>:/data" ### Specify the directory of images to be mounted in the container
+      - "</host/data/dir>:/data" ### Directory of images to be mounted in the container (relative to your current working directory) 
     environment:
-      - AGISOFT_FLS=${AGISOFT_FLS} ### Declare where your Metashape license server is located
+      - AGISOFT_FLS=${AGISOFT_FLS} ### You should have declared your Metashape license in the terminal already
     
     deploy:
       resources:
@@ -59,10 +59,14 @@ services:
       automate-metashape:
         condition: service_completed_successfully
     volumes:
-      - ../output:/input  ### Specify the directory where image products are written to
+      - ../output:/input  ### Directory where image products are written to (relative to your current working directory)
 ```
 
 
+### Run docker compose
 
+At the terminal, you need to be located in the directory where the `docker-compose.yml` is located.
+
+`docker compose up`
 
 
