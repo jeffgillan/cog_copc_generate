@@ -20,5 +20,9 @@ When you run the container image, it will crawl over a user defined volume and c
 
 ## Pair cog_copc_generate with automate-metashape
 
+This `cog_copc_generate` container was designed to work direcly with [automate-metashape](https://github.com/open-forest-observatory/automate-metashape) created by [Open Forest Observatory](https://openforestobservatory.org/). Before using `cog_copc_generate` with `automate-metashape`, it is best to first familiarize yourself with how to use the containerized implimentation of automate-metashape [here](https://github.com/open-forest-observatory/automate-metashape?tab=readme-ov-file#setup-docker-container). 
+
+`Automate-metashape` and `cog_copc_generate` are both in docker containers. We can run them sequentially using `docker compose`. `Automate-metashape` will run first and output imagery products into a user-defined directory. `cog_copc_generate` will wait for the first container to run and then proceed to crawl throught the output directory and convert all geotifs to COGs, and all .laz/las to COPCs. 
+
 
 
