@@ -30,7 +30,7 @@ Configuration to run `automate-metashape` and `cog_copc_generate` sequentially i
 
 * Specify the directory of images to be mounted in the container. This is relative to your current working directory. 
 * Make sure your Metashape license has already been declared in your terminal session
-* Specify the directory where the output image products are being written to. This is relative to your current working directory and is specified within the automate-metashape `config.yml`. 
+* Specify the directory where the output image products are being written to. This is relative to your current working directory and is specified within the automate-metashape `config.yml`. Please **do not** change the location of the mounted directory in the container (ie, `/input`).
 
 <br>
 
