@@ -29,6 +29,7 @@ This `cog_copc_generate` container was designed to work direcly with [automate-m
 Configuration to run `automate-metashape` and `cog_copc_generate` sequentially is controlled in the `docker-compose.yml` file located in this repository. Download this file to be in or near the local directory with the aerial images to be processed. 
 
 ```
+**docker-compose.yml** 
 services:
   automate-metashape:
     image: ghcr.io/open-forest-observatory/automate-metashape
