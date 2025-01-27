@@ -24,5 +24,39 @@ This `cog_copc_generate` container was designed to work direcly with [automate-m
 
 `Automate-metashape` and `cog_copc_generate` are both in docker containers. We can run them sequentially using `docker compose`. `Automate-metashape` will run first and output imagery products into a user-defined directory. `cog_copc_generate` will wait for the first container to run and then proceed to crawl throught the output directory and convert all geotifs to COGs, and all .laz/las to COPCs. 
 
+### Setup 
+
+Configuration to run `automate-metashape` and `cog_copc_generate` sequentially is controlled in the `docker-compose.yml` file located in this repository. Download this file to be in or near the local directory with the aerial images to be processed. 
+
+```
+services:
+  automate-metashape:
+    image: ghcr.io/open-forest-observatory/automate-metashape
+    container_name: automate-metashape
+    volumes:
+      - "</host/data/dir>:/data" ### Specify the directory of images to be mounted in the container
+    environment:
+      - AGISOFT_FLS=${AGISOFT_FLS} ### Declare where your Metashape license server is located
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  untwine:
+    image: jeffgillan/cog_copc_generate:amd64
+    container_name: cog_copc_generate
+    depends_on:
+      automate-metashape:
+        condition: service_completed_successfully
+    volumes:
+      - ../output:/input  ### Specify the directory where image products are written to
+```
+
+
+
 
 
